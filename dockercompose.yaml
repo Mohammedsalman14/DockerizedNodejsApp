@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: login14ms  
+      MYSQL_DATABASE: nodejs_signup
+      MYSQL_USER: salman
+      MYSQL_PASSWORD: salman14ms
+    ports:
+      - "3306:3306"
+    networks:
+      - app_network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8083:8080"
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
