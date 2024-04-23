@@ -3,7 +3,6 @@ version: '3.8'
 services:
   db:
     image: mysql:5.7
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: login14ms  
       MYSQL_DATABASE: nodejs_signup
@@ -11,6 +10,8 @@ services:
       MYSQL_PASSWORD: salman14ms
     ports:
       - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql  # MySQL data volume
     networks:
       - app_network
 
@@ -19,6 +20,15 @@ services:
     restart: always
     ports:
       - "8083:8080"
+    networks:
+      - app_network
+
+  myapp:
+    image: nodejsapp:1.2
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./myapp_data:/usr/src/app  # Myapp code volume
     networks:
       - app_network
 
